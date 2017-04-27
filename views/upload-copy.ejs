@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/js/fileinput.js"></script>
+    <style>
+    a.button {
+        -webkit-appearance: button;
+        -moz-appearance: button;
+        appearance: button;
+        float: right;
+        text-decoration: none;
+        color: initial;
+        background-color: #4CAF50; /* Green */
+        padding: 15px 32px;
+        border-radius: 10px;
+    }
+    </style>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <a href="/logout" class="button">Logout</a>
+
+    <p>Upload file</p>
+    <div>
+      <label class="control-label">Select File</label>
+      <input id="input-44" name="input44[]" type="file" single class="file-loading">
+      <div id="errorBlock" class="help-block"></div>
+      <div id="kv-success-2" class="alert alert-success fade in" style="margin-top:10px;display:none">
+       
+      </div>
+      <div id="img-block"></div> 
+      <script>
+         $(document).on('ready', function() {
+            $("#input-44").fileinput({
+                uploadUrl: '/upload',
+                allowedFileExtensions: ["zip"],
+                uploadAsync: false,
+                maxFilePreviewSize: 10240,
+                elErrorContainer: "#errorBlock"
+            }).on('filebatchpreupload', function(event, data, id, index) {
+                $('#kv-success-2').html('<h4>Upload Status</h4><ul></ul>').hide();
+            }).on('filebatchuploadsuccess', function(event, data) {
+                var out = '';
+                $.each(data.files, function(key, file) {
+                    var fname = file.name;
+                    out = out + '<li>' + 'Uploaded file # ' + (key + 1) + ' - '  +  fname + ' successfully.' + '</li>';
+                    out = out + '<img src='+JSON.stringify(data.response.url)+' alt="result">';          
+                });
+                $('#kv-success-2 ul').append(out);
+                $('#kv-success-2').fadeIn('slow');
+            });
+        });
+
+ 
+      </script>
+    </div>
+  </body>
+</html>
