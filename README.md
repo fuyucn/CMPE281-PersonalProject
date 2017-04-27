@@ -1,20 +1,16 @@
 
 
-# CMPE281SP
-
+# CMPE281 Personal Project
+This is personal project for CMPE 281.
+This project is an interface for user to upload zip file, and create uml png image to users. Also, a greader page could help teach to grade png.
 
 
 ## Usage
-
-
+node app.js
+localhost:3000
 
 ## Developing
-
+Node.js
 
 
 ### Tools
-
-Created with [Nodeclipse](https://github.com/Nodeclipse/nodeclipse-1)
- ([Eclipse Marketplace](http://marketplace.eclipse.org/content/nodeclipse), [site](http://www.nodeclipse.org))   
-
-Nodeclipse is free open-source project that grows with your contributions.
