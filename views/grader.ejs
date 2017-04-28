@@ -4,28 +4,105 @@
   <meta charset="UTF-8">
   <title>Example - example-ng-repeat-production</title>
   <link href="animations.css" rel="stylesheet" type="text/css">
-  
-
-  <script src="//code.angularjs.org/snapshot/angular.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="//code.angularjs.org/snapshot/angular.js"></script>
   <script src="//code.angularjs.org/snapshot/angular-animate.js"></script>
   <script src="/angularjs/angular.js"></script>
- 
+<style>
+  .max{width:100%;height:auto;}
+  .min{width:100px;height:auto;}
+</style>
+<script>
+  $(function(){
+      $('#img').click(function(){
+        $(this).toggleClass('min');
+        $(this).toggleClass('max');
+      });
+    });
+</script>
 </head>
 
 <body ng-app="ngRepeat">
+<div class="col-md-8 col-sm-offset-2 text-center">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          
+          <li><a href="/">Login</a></li>
+          <li class="active"><a href="/grader">Grader <span class="sr-only">(current)</span></a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
   <div ng-controller="repeatController">
-  I have {{friends.length}} friends. They are:
-  <input type="search" ng-model="q" placeholder="filter friends..." aria-label="filter friends" />
+  <h4>Grade Page</h4>
+
   <ul class="example-animate-container">
     <li class="animate-repeat" ng-repeat="friend in friends | filter:q as results">
-      [{{$index + 1}}] {{friend.name}} who is {{friend.age}} years old.
+      <div class="panel-group" >
+        <div class="panel panel-info">
+          <div class="panel-heading">
+          <div class="row">
+            <div class="col-md-3">
+              <h3>{{friend.sjsuid}} <small>SJSU ID</small></h3>
+            </div>
+            <div class="col-md-3" >
+              <div ng-if="friend.img==undefined">
+               <span class="label label-danger" style="font-size: 14px;">UNSUBMIT</span><h4><small>STATUS</small></h4>
+              </div>      
+              <div ng-if="friend.img!=undefined">
+               <span class="label label-info" style="font-size: 14px;">SUBMITTED</span><h4><small>STATUS</small></h4>
+              </div>
+            </div>
+             <div class="col-md-1">
+                <div ng-if="friend.status!='Graded'">
+                  <h3> <span class="label label-default">Grade:</span></h3>
+                </div> 
+                <div ng-if="friend.status=='Graded'">
+                  <h3> <span class="label label-success">Grade:</span></h3>
+                </div> 
+              </div>
+              <div class="col-md-1">
+                <h4 ng-click="show$index=!show$index" ng-show="!show$index">
+                  <div ng-if="friend.grade==undefined">
+                  0
+                  </div>      
+                  <div ng-if="friend.grade!=undefined">
+                   {{friend.grade}}
+                  </div>
+                  /10
+                </h4>
+                <form ng-submit="submit($index,newgrade$index)" ng-show="show$index" >
+                  <input type="number"  ng-model="newgrade$index" min="-1" max="10"/>
+                  <input type="submit" id="submit" value="Submit" ng-click="show$index=!show$index"/>
+                </form>
+               </div>  
+
+          </div> 
+          </div>
+          <div class="panel-body">      
+            <div ng-if="friend.img==undefined">   
+            </div>
+            <div ng-if="friend.img!=undefined">
+             <img class='min' id='img' src="{{friend.img}}"  style="width:800px; height:450px;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr/>
     </li>
     <li class="animate-repeat" ng-if="results.length === 0">
-      <strong>No results found...</strong>
+    <strong>No results found...</strong>
     </li>
   </ul>
 </div>
+</div>
 </body>
+
 </html>
 
 <!-- 

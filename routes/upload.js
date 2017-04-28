@@ -29,8 +29,8 @@ var fs = require('fs');
 var AWS = require('aws-sdk');
 
 //setup aws accress
-var accessKeyId =  process.env.AWS_ACCESS_KEY || "AKIAITJMN2YTO5LA2QHQ";
-var secretAccessKey = process.env.AWS_SECRET_KEY || "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";
+var accessKeyId =  process.env.AWS_ACCESS_KEY || "AKIAICO4ZVQ6M4AI6H4Q";
+var secretAccessKey = process.env.AWS_SECRET_KEY || "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";
 AWS.config.update({
     accessKeyId: accessKeyId,
     secretAccessKey: secretAccessKey
@@ -106,22 +106,23 @@ exports.upload=function (req,res) {
         console.log("Error uploading data: ", perr);
       } else {
         console.log("Successfully uploaded data to myBucket/myKey");
+        var obj = new Object();
+      obj.url="https://s3-us-west-2.amazonaws.com/cmpe281-personalproject/"+key;
+      console.log(obj);
+
+      connection.query('UPDATE uploads SET img="'+obj.url+'", status="submitted" WHERE sjsuid='+ req.session.uid+';', function(err, rows, fields) {
+        if (!err)
+        {
+
+        }
+        else
+          console.log('Error while update "uploads" table."'+err);
+      });
+      res.end(JSON.stringify(obj));
       }
     });
 
-    var obj = new Object();
-    obj.url="https://s3-us-west-2.amazonaws.com/cmpe281-personalproject/"+key;
-    console.log(obj);
-
-    connection.query('UPDATE uploads SET img="'+obj.url+'", status="submitted" WHERE sjsuid='+ req.session.uid+';', function(err, rows, fields) {
-      if (!err)
-      {
-
-      }
-      else
-        console.log('Error while update "uploads" table."'+err);
-    });
-    res.end(JSON.stringify(obj));
+    
 
   });
   

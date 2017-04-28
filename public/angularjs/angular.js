@@ -1,27 +1,54 @@
 angular.module('ngRepeat', ['ngAnimate'])
-  .controller('repeatController', ['$scope', function ($scope) {
-  /*$scope.friends = [
-    {name:'John', age:25, gender:'boy'},
-    {name:'Jessie', age:30, gender:'girl'},
-    {name:'Johanna', age:28, gender:'girl'},
-    {name:'Joy', age:15, gender:'girl'},
-    {name:'Mary', age:28, gender:'girl'},
-    {name:'Peter', age:95, gender:'boy'},
-    {name:'Sebastian', age:50, gender:'boy'},
-    {name:'Erika', age:27, gender:'girl'},
-    {name:'Patrick', age:40, gender:'boy'},
-    {name:'Samantha', age:60, gender:'girl'}
-    ];*/
+  .controller('repeatController', ['$scope','$http', function ($scope, $http) {
+
+
+    $scope.newgrade0=0;
+    $scope.newgrade1=0;
+    $scope.newgrade2=0;
+    $scope.newgrade3=0;
     $http({
       method: 'GET',
-      url: '/someUrl'
+      url: '/getAll'
     }).then(function successCallback(response) {
         // this callback will be called asynchronously
         // when the response is available
+        console.log(response.data);
+        var length =response.data.length;
+        console.log(length);
+        $scope.friends=response.data;
+        $scope.newgrade0=$scope.friends[0].grade;
+        $scope.newgrade1=$scope.friends[1].grade;
+        $scope.newgrade2=$scope.friends[2].grade;
+        $scope.newgrade3=$scope.friends[3].grade;
     }, function errorCallback(response) {
       // called asynchronously if an error occurs
       // or server returns response with an error status.
     });
+
+    $scope.submit = function(index,newgrade) {
+        console.log("submit");
+        //console.log($scope.friends[index].grade);
+        var newGrade=  newgrade;
+     
+        console.log(newGrade);
+        if (newGrade && newGrade!=$scope.friends[index].grade) {
+          console.log(index);
+          $scope.friends[index].grade=newGrade;
+            $http({
+              method: 'GET',
+              url: '/grade/'+$scope.friends[index].sjsuid+"/"+newgrade
+            }).then(function successCallback(response) {
+                // this callback will be called asynchronously
+                // when the response is available
+                $scope.friends[index].grade=newGrade;
+            }, function errorCallback(response) {
+              // called asynchronously if an error occurs
+              // or server returns response with an error status.
+            });
+          
+         
+      }
+    };
 }]);
 
   

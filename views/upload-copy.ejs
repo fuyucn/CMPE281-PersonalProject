@@ -22,18 +22,33 @@
     </style>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <a href="/logout" class="button">Logout</a>
-
-    <p>Upload file</p>
-    <div>
-      <label class="control-label">Select File</label>
+    <div class="col-md-8 col-sm-offset-2 text-center">
+    <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">upload <span class="sr-only">(current)</span></a></li>
+          
+      </ul>
+       <ul class="nav navbar-nav navbar-right">
+      <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+    <h1 style="text-align:left;">SJSU ID: <%= title %></h1>
+    
+      
+      <div>
+      <label style="text-align:left;" class="control-label">Select File</label>
       <input id="input-44" name="input44[]" type="file" single class="file-loading">
-      <div id="errorBlock" class="help-block"></div>
-      <div id="kv-success-2" class="alert alert-success fade in" style="margin-top:10px;display:none">
+      <div id="errorBlock" class="help-block" style="text-align:left;"></div>
+      <div id="kv-success-2" class="alert alert-success fade in" style="margin-top:10px;display:none;text-align:left;">
        
       </div>
       <div id="img-block"></div> 
+      </div>
       <script>
          $(document).on('ready', function() {
             $("#input-44").fileinput({

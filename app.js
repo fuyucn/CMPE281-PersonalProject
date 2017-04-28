@@ -46,8 +46,9 @@ app.get('/logout',index.logout);
 app.get('/upload', upload.page);
 app.get('/upload2', upload.page2);
 app.post('/upload', upload.upload);
-
+app.get('/grade/:sjsuid/:grade', grader.grade);
 app.get('/grader',grader.graderPage);
+app.get('/getAll',grader.getAll);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
