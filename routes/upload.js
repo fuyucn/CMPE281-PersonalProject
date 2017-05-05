@@ -118,6 +118,7 @@ exports.upload=function (req,res) {
         {
             console.log("uploaded:" + obj.url);
             console.log("Enquery");
+            
         }
         else
           console.log('Error while update "uploads" table."'+err);
@@ -125,12 +126,27 @@ exports.upload=function (req,res) {
       res.end(JSON.stringify(obj));
       }
     });
-
-    
-
   });
   
   // parse the incoming request containing the form data
   form.parse(req);
 };
 
+exports.grade = function(req, res){
+  console.log(req.body.grade);
+  console.log(req.body.comment);
+  var grade = req.body.grade;
+  var comment =req.body.comment;
+  var sjsuid =req.param('sjsuid');
+
+  connection.query('UPDATE uploads SET grade="'+grade+'", comment="'+comment+'" WHERE sjsuid='+ sjsuid+';', function(err, rows, fields) {
+      if (!err)
+      {
+          console.log("Enquery grade");
+      }
+      else
+        console.log('Error while update "uploads" table."'+err);
+    });
+  res.render('suc', { title: sjsuid });
+
+};

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="/js/fileinput.js"></script>
+    <style>
+    a.button {
+        -webkit-appearance: button;
+        -moz-appearance: button;
+        appearance: button;
+        float: right;
+        text-decoration: none;
+        color: initial;
+        background-color: #4CAF50; /* Green */
+        padding: 15px 32px;
+        border-radius: 10px;
+    }
+    </style>
+  </head>
+  <body>
+    <div class="col-md-8 col-sm-offset-2 text-center">
+    <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="<%= '/'+title+'/upload' %>">upload <span class="sr-only">(current)</span></a></li>
+          
+      </ul>
+       <ul class="nav navbar-nav navbar-right">
+      <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+    </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+    <h1 style="text-align:left;">SJSU ID: <%= title %></h1>
+    
+    <h4> You Have Graded Success!</h4>
+    </div>
+  </body>
+</html>

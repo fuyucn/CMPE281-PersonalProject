@@ -64,7 +64,18 @@
                 $.each(data.files, function(key, file) {
                     var fname = file.name;
                     out = out + '<li>' + 'Uploaded file # ' + (key + 1) + ' - '  +  fname + ' successfully.' + '</li>';
-                    out = out + '<img src='+JSON.stringify(data.response.url)+' alt="result" style="">';          
+                    out = out 
+                      +'<form action="<%= "/"+title+"/grade" %>" method="POST">'
+                        +'Grade:<br>'
+                        +'<input type="number" name="grade" placeholder="out of 10">'
+                        +'<br>'
+                        +'Comments:<br>'
+                        +'<input type="text" name="comment">'
+                        +'<br>'
+                        +'<input type="submit" value="Submit">'
+                      +'</form>';   
+                    out = out + '<img src='+JSON.stringify(data.response.url)+' alt="result" style="">';      
+ 
                 });
                 $('#kv-success-2 ul').append(out);
                 $('#kv-success-2').fadeIn('slow');

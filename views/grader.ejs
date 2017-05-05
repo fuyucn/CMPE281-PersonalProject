@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Example - example-ng-repeat-production</title>
+  <title>Grader Page</title>
   <link href="animations.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
@@ -22,7 +22,7 @@
         <ul class="nav navbar-nav">
           
           <li><a href="/">Login</a></li>
-          <li class="active"><a href="/grader">Grader <span class="sr-only">(current)</span></a></li>
+          <li class="active"><a href="/grader">Grades <span class="sr-only">(current)</span></a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -40,10 +40,10 @@
               <h3>{{user.sjsuid}} <small>SJSU ID</small></h3>
             </div>
             <div class="col-md-3" >
-              <div ng-if="user.img==undefined">
+              <div ng-if="user.img==undefined || user.img==''">
                <span class="label label-danger" style="font-size: 14px;">UNSUBMIT</span><h4><small>STATUS</small></h4>
               </div>      
-              <div ng-if="user.img!=undefined">
+              <div ng-if="user.img!=undefined && user.img!=''">
                <span class="label label-info" style="font-size: 14px;">SUBMITTED</span><h4><small>STATUS</small></h4>
               </div>
             </div>
@@ -78,10 +78,10 @@
               <h3> <span class="label label-primary">Comment:</span></h3>
 
               <h4 ng-click="showcom$index=!showcom$index" ng-show="!showcom$index">
-                <div ng-if="user.comment==undefined">
+                <div ng-if="user.comment==''">
                 No Comment
                 </div>      
-                <div ng-if="user.comment!=undefined">
+                <div ng-if="user.comment!=''">
                  {{user.comment}}
                 </div>
                

@@ -39,7 +39,6 @@ app.set('view engine', 'ejs');
 
 
 app.get('/', routes.index);
-app.get('/:sjsuid', routes.index);
 //app.get('/img', upload.getImg);
 app.post('/:sjsuid/login', index.login);
 app.get('/login', index.login);
@@ -47,6 +46,7 @@ app.get('/logout',index.logout);
 //app.get('/upload', upload.page);
 app.get('/:sjsuid/upload', upload.page2);
 app.post('/:sjsuid/upload', upload.upload);
+app.post('/:sjsuid/grade', upload.grade);
 app.get('/grade/:sjsuid/:grade', grader.grade);
 app.get('/grader',grader.graderPage);
 app.get('/grade/comment/:sjsuid/:comment', grader.comment);
