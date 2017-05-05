@@ -40,14 +40,15 @@ app.set('view engine', 'ejs');
 
 app.get('/', routes.index);
 //app.get('/img', upload.getImg);
-app.post('/login', index.login);
+app.post('/:sjsuid/login', index.login);
 app.get('/login', index.login);
 app.get('/logout',index.logout);
-app.get('/upload', upload.page);
-app.get('/upload2', upload.page2);
-app.post('/upload', upload.upload);
+//app.get('/upload', upload.page);
+app.get('/:sjsuid/upload', upload.page2);
+app.post('/:sjsuid/upload', upload.upload);
 app.get('/grade/:sjsuid/:grade', grader.grade);
 app.get('/grader',grader.graderPage);
+app.get('/grade/comment/:sjsuid/:comment', grader.comment);
 app.get('/getAll',grader.getAll);
 
 http.createServer(app).listen(app.get('port'), function(){

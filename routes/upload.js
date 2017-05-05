@@ -16,6 +16,7 @@ exports.page = function(req, res){
   res.render('upload', { title: 'upload' });
 };
 exports.page2 = function(req, res){
+  req.session.uid=req.param('sjsuid');
   if (!req.session.uid) {
     res.redirect("/")
   } else {
@@ -37,6 +38,7 @@ AWS.config.update({
 });
 
 exports.upload=function (req,res) {
+  var sjsuid = req.param('sjsuid');
   // create an incoming form object
   var form = new formidable.IncomingForm();
 
@@ -71,11 +73,12 @@ exports.upload=function (req,res) {
   // once all the files have been uploaded, send a response to the client
   form.on('end', function() {
 
-     var key= req.session.uid+"result.png";
+     var key= sjsuid+"result.png";
     // generate png file
 
     //res.end('success');
-      console.log("Starting unzip")
+  console.log("Starting unzip")
+  cmd.execSync("rm -r -f uploads/testFile");
   var output = cmd.execSync("unzip -o uploads/testFile.zip -d uploads/testFile");
   console.log("Starting generate img")
   try {
@@ -107,13 +110,14 @@ exports.upload=function (req,res) {
       } else {
         console.log("Successfully uploaded data to myBucket/myKey");
         var obj = new Object();
-      obj.url="https://s3-us-west-2.amazonaws.com/cmpe281-personalproject/"+key;
-      console.log(obj);
+        obj.url="https://s3-us-west-2.amazonaws.com/cmpe281-personalproject/"+key;
+        console.log(obj);
 
-      connection.query('UPDATE uploads SET img="'+obj.url+'", status="submitted" WHERE sjsuid='+ req.session.uid+';', function(err, rows, fields) {
+      connection.query('UPDATE uploads SET img="'+obj.url+'", status="submitted" WHERE sjsuid='+ sjsuid+';', function(err, rows, fields) {
         if (!err)
         {
-
+            console.log("uploaded:" + obj.url);
+            console.log("Enquery");
         }
         else
           console.log('Error while update "uploads" table."'+err);
@@ -130,8 +134,3 @@ exports.upload=function (req,res) {
   form.parse(req);
 };
 
-function geen(key)
-{
-
-  return true;
-};

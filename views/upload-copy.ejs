@@ -47,12 +47,12 @@
       <div id="kv-success-2" class="alert alert-success fade in" style="margin-top:10px;display:none;text-align:left;">
        
       </div>
-      <div id="img-block"></div> 
+      <div id="img-block" ></div> 
       </div>
       <script>
          $(document).on('ready', function() {
-            $("#input-44").fileinput({
-                uploadUrl: '/upload',
+              $("#input-44").fileinput({
+                uploadUrl: '<%= '/'+title+'/upload' %>',
                 allowedFileExtensions: ["zip"],
                 uploadAsync: false,
                 maxFilePreviewSize: 10240,
@@ -64,7 +64,7 @@
                 $.each(data.files, function(key, file) {
                     var fname = file.name;
                     out = out + '<li>' + 'Uploaded file # ' + (key + 1) + ' - '  +  fname + ' successfully.' + '</li>';
-                    out = out + '<img src='+JSON.stringify(data.response.url)+' alt="result">';          
+                    out = out + '<img src='+JSON.stringify(data.response.url)+' alt="result" style="">';          
                 });
                 $('#kv-success-2 ul').append(out);
                 $('#kv-success-2').fadeIn('slow');

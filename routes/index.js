@@ -4,7 +4,7 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'JAVA CODE UML GRADER' });
 };
 
 //mysql
@@ -33,8 +33,8 @@ exports.login = function(req,res){
 	  {
 	  	console.log('The solution is: ', rows[0].COUNT);
 	  	if (rows[0].COUNT==1){
-	  		req.session.uid=sjsuid;
-	  		res.redirect("/upload2")
+	  		//req.session.uid=sjsuid;
+	  		res.redirect("/"+sjsuid+"/upload")
 	  	}
 	  	else{
 	  		res.redirect("/");
