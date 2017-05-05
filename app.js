@@ -39,6 +39,7 @@ app.set('view engine', 'ejs');
 
 
 app.get('/', routes.index);
+app.get('/:sjsuid', routes.index);
 //app.get('/img', upload.getImg);
 app.post('/:sjsuid/login', index.login);
 app.get('/login', index.login);
