@@ -10,10 +10,10 @@ exports.index = function(req, res){
 //mysql
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'cmpe281pp.cwnhgkeil57z.us-west-2.rds.amazonaws.com',
-  user     : 'root',
-  password : 'rootroot',
-  database : 'cmpe281pp'
+  host     : '####',
+  user     : '####',
+  password : '####',
+  database : '####'
 });
 
 //login
