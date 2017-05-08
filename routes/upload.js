@@ -134,12 +134,13 @@ exports.upload=function (req,res) {
 
 exports.grade = function(req, res){
   console.log(req.body.grade);
-  console.log(req.body.comment);
+  console.log(req.body.completechoice);
   var grade = req.body.grade;
   var comment =req.body.comment;
   var sjsuid =req.param('sjsuid');
+  var complete =req.body.completechoice;
 
-  connection.query('UPDATE uploads SET grade="'+grade+'", comment="'+comment+'" WHERE sjsuid='+ sjsuid+';', function(err, rows, fields) {
+  connection.query('UPDATE uploads SET grade="'+grade+'", comment="'+comment+'", complete="'+complete+'" WHERE sjsuid='+ sjsuid+';', function(err, rows, fields) {
       if (!err)
       {
           console.log("Enquery grade");
