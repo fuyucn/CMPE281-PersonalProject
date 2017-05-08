@@ -6,10 +6,10 @@ var cmd = require("child_process");
 //mysql
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
-  host     : 'cmpe281pp.cwnhgkeil57z.us-west-2.rds.amazonaws.com',
-  user     : 'root',
-  password : 'rootroot',
-  database : 'cmpe281pp'
+  host     : '####',
+  user     : '####',
+  password : '####',
+  database : '####'
 });
 
 exports.page = function(req, res){
@@ -30,8 +30,8 @@ var fs = require('fs');
 var AWS = require('aws-sdk');
 
 //setup aws accress
-var accessKeyId =  process.env.AWS_ACCESS_KEY || "AKIAICO4ZVQ6M4AI6H4Q";
-var secretAccessKey = process.env.AWS_SECRET_KEY || "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";
+var accessKeyId =  process.env.AWS_ACCESS_KEY || "####";
+var secretAccessKey = process.env.AWS_SECRET_KEY || "####";
 AWS.config.update({
     accessKeyId: accessKeyId,
     secretAccessKey: secretAccessKey
